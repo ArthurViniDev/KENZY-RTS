@@ -22,8 +22,19 @@ public class SelectionManager : MonoBehaviour
 
     private void SelectObject(GameObject selectedObject)
     {
-        if (selectedObjects.Contains(selectedObject)) return;
+        if (selectedObjects.Contains(selectedObject))
+        {
+            DeselectObject(selectedObject);
+            return;
+        }
         selectedObjects.Add(selectedObject);
         selectedObject.GetComponent<ISelectable>().OnSelect();
+    }
+
+    private void DeselectObject(GameObject selectedObject)
+    {
+        if (!selectedObjects.Contains(selectedObject)) return;
+        selectedObjects.Remove(selectedObject);
+        selectedObject.GetComponent<ISelectable>().OnDeselect();
     }
 }
