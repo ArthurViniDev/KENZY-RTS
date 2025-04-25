@@ -6,12 +6,19 @@ public class BaseUnit : MonoBehaviour, ISelectable
     public float speed;
     public float range;
 
+    [SerializeField] private GameObject selectionMark;
+
+    void Start()
+    {
+        selectionMark = transform.GetChild(0).gameObject;
+    }
+
     public void OnSelect()
     {
-        // logic
+        selectionMark.SetActive(true);
     }
     public void OnDeselect()
     {
-        // logic
+        selectionMark.SetActive(false);
     }
 }
