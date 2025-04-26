@@ -12,11 +12,11 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Animator animator;
 
-    private AnimationController animationController;
+    private IAnimationController animationController;
     void Start()
     {
         animator = GetComponent<Animator>();
-        animationController = new AnimationController(animator);
+        animationController = new AnimationController(animator, "Idle");
         selectionMark = transform.GetChild(0).gameObject;
         agent = GetComponent<NavMeshAgent>();
     }
@@ -51,18 +51,18 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 
     public void Move(Vector3 targetPosition)
     {
-        if (targetPosition == null) return;
         agent.SetDestination(targetPosition);
     }
 }
 
-public class AnimationController
+public class AnimationController : IAnimationController
 {
     private Animator animator;
     private string currentAnimation;
 
-    public AnimationController(Animator animator)
+    public AnimationController(Animator animator, string currentAnimation = "")
     {
+        this.currentAnimation = currentAnimation;
         this.animator = animator;
     }
 
