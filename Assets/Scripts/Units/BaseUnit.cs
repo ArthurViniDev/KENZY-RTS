@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,15 +6,21 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Animator))]
 public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 {
+    [Header("Unit Stats")]
     public int health;
     public float range;
 
-    [SerializeField] private GameObject selectionMark;
-    [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private Animator animator;
+    public bool isAttacking = false;
+    public GameObject target;
 
-    private IAnimationController animationController;
-    void Start()
+    [SerializeField] private float stopDistance = 1.0f;
+    private GameObject selectionMark;
+    private NavMeshAgent agent;
+    private Animator animator;
+
+    protected IAnimationController animationController;
+
+    private void Start()
     {
         animator = GetComponent<Animator>();
         animationController = new AnimationController(animator, "Idle");
@@ -21,8 +28,21 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         agent = GetComponent<NavMeshAgent>();
     }
 
-    void Update()
+    public virtual void Update()
     {
+        if (target && !isAttacking)
+        {
+            float distance = Vector3.Distance(transform.position, target.transform.position);
+            Debug.Log("Distance: " + distance);
+            if (distance <= stopDistance)
+            {
+                agent.isStopped = true;
+                OnAttack();
+            }
+        }
+
+        if (isAttacking) return;
+
         bool isMoving = agent.velocity.magnitude > 0.1f;
 
         if (isMoving) OnMove();
@@ -49,8 +69,18 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         selectionMark.SetActive(false);
     }
 
+    public void OnAttack()
+    {
+        isAttacking = true;
+        animationController.ChangeAnimation("Attack");
+
+        Vector3 lookDirection = (target.transform.position - transform.position);
+        transform.rotation = Quaternion.LookRotation(lookDirection);
+    }
+
     public void Move(Vector3 targetPosition)
     {
+        agent.isStopped = false;
         agent.SetDestination(targetPosition);
     }
 }

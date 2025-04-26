@@ -3,7 +3,7 @@ using UnityEngine;
 public class UnitManager : MonoBehaviour
 {   
     [SerializeField] private LayerMask groundLayerMask;
-    [SerializeField] private SelectionManager selectionManager;
+    private SelectionManager selectionManager;
 
     void Start()
     {
@@ -26,6 +26,11 @@ public class UnitManager : MonoBehaviour
             {
                 BaseUnit unit = selectedObject.GetComponent<BaseUnit>(); 
                 if (unit) unit.Move(targetPosition);
+                if(hit.collider.gameObject.CompareTag("Target")) unit.target = hit.collider.gameObject;
+                else { 
+                    unit.target = null;
+                    unit.isAttacking = false;
+                }
             }
         }
     }
