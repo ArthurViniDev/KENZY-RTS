@@ -64,6 +64,7 @@ public class AnimationController : IAnimationController
     {
         this.currentAnimation = currentAnimation;
         this.animator = animator;
+
     }
 
     public void ChangeAnimation(string animationName)

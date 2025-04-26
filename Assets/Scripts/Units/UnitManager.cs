@@ -4,16 +4,15 @@ public class UnitManager : MonoBehaviour
 {   
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private SelectionManager selectionManager;
+
     void Start()
     {
         selectionManager = FindFirstObjectByType<SelectionManager>();
     }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            MovementHandler();
-        }
+        if (Input.GetMouseButtonDown(1)) MovementHandler();
     }
 
     private void MovementHandler()
@@ -25,7 +24,7 @@ public class UnitManager : MonoBehaviour
             Vector3 targetPosition = hit.point;
             foreach (GameObject selectedObject in selectionManager.selectedObjects)
             {
-                BaseUnit unit = selectedObject.GetComponent<BaseUnit>();
+                BaseUnit unit = selectedObject.GetComponent<BaseUnit>(); 
                 if (unit) unit.Move(targetPosition);
             }
         }
