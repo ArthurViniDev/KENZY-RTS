@@ -13,7 +13,6 @@ public class SelectionManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hit, Mathf.Infinity, selectableLayerMask))
             {
-                Debug.Log("Hit: " + hit.collider.gameObject.name);
                 ISelectable selectedObject = hit.collider.gameObject.GetComponent<ISelectable>();
                 SelectObject(selectedObject);
             }

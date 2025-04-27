@@ -37,7 +37,6 @@ public class BaseResources : MonoBehaviour, ICollectable
     {
         if (collectCoroutine != null)
         {
-            Debug.Log("Stopping collect coroutine");
             StopCoroutine(collectCoroutine);
             collectCoroutine = null;
         }

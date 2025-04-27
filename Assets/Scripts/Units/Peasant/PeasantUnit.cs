@@ -18,12 +18,15 @@ public class PeasantUnit : BaseUnit, ICollector
 
     public override void OnEndAttack()
     {
-        base.OnEndAttack();
-        if (currentCollectable != null)
+        if (currentCollectable == null || !target) 
         {
-            currentCollectable.StopCollecting();
-            currentCollectable = null; // Limpa depois que para
+            isAttacking = false;
+            return;
         }
+        
+        currentCollectable.StopCollecting();
+        currentCollectable = null;
+        base.OnEndAttack();
     }
 
     public void AddResource(ResourceType resourceType, int amount)
