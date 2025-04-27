@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
 {
-    public List<GameObject> selectedObjects;
+    public List<ISelectable> selectedObjects = new List<ISelectable>();
     [SerializeField] private LayerMask selectableLayerMask;
 
     private void Update()
@@ -11,16 +11,16 @@ public class SelectionManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, selectableLayerMask))
+            if (Physics.Raycast(ray, out var hit, Mathf.Infinity, selectableLayerMask))
             {
-                GameObject selectedObject = hit.collider.gameObject;
+                Debug.Log("Hit: " + hit.collider.gameObject.name);
+                ISelectable selectedObject = hit.collider.gameObject.GetComponent<ISelectable>();
                 SelectObject(selectedObject);
             }
         }
     }
 
-    private void SelectObject(GameObject selectedObject)
+    private void SelectObject(ISelectable selectedObject)
     {
         if (selectedObjects.Contains(selectedObject))
         {
@@ -28,13 +28,13 @@ public class SelectionManager : MonoBehaviour
             return;
         }
         selectedObjects.Add(selectedObject);
-        selectedObject.GetComponent<ISelectable>().OnSelect();
+        selectedObject.SetSelection(true);
     }
 
-    private void DeselectObject(GameObject selectedObject)
+    private void DeselectObject(ISelectable selectedObject)
     {
         if (!selectedObjects.Contains(selectedObject)) return;
         selectedObjects.Remove(selectedObject);
-        selectedObject.GetComponent<ISelectable>().OnDeselect();
+        selectedObject.SetSelection(false);
     }
 }

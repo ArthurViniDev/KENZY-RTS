@@ -1,5 +1,4 @@
 public interface IWalkable
 {
-    public void OnMove();
-    public void OnStop();
+    public void SetState(string state);
 }

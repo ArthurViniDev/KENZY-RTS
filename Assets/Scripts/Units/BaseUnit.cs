@@ -12,7 +12,6 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 
     public bool isAttacking = false;
     public GameObject target { get; set; }
-    //public ICollectable TargetCollectable => target?.GetComponent<ICollectable>();
 
     [SerializeField] private float stopDistance = 1.0f;
     private GameObject selectionMark;
@@ -46,28 +45,18 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 
         bool isMoving = agent.velocity.magnitude > 0.1f;
 
-        if (isMoving) OnMove();
-        else OnStop();
+        if (isMoving) SetState("Walk");
+        else SetState("Idle");
     }
 
-    public void OnMove()
+    public void SetState(string state)
     {
-        animationController.ChangeAnimation("Walk");
+        animationController.ChangeAnimation(state);
     }
 
-    public void OnStop()
+    public void SetSelection(bool state)
     {
-        animationController.ChangeAnimation("Idle");
-    }
-
-    public void OnSelect()
-    {
-        selectionMark.SetActive(true);
-    }
-    
-    public void OnDeselect()
-    {
-        selectionMark.SetActive(false);
+        selectionMark.SetActive(state);
     }
 
     public virtual void OnAttack()

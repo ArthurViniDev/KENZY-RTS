@@ -22,9 +22,9 @@ public class UnitManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask))
         {
             Vector3 targetPosition = hit.point;
-            foreach (GameObject selectedObject in selectionManager.selectedObjects)
+            foreach (ISelectable selectedObject in selectionManager.selectedObjects)
             {
-                BaseUnit unit = selectedObject.GetComponent<BaseUnit>(); 
+                BaseUnit unit = (BaseUnit)selectedObject; 
                 if (unit) unit.Move(targetPosition);
                 if(hit.collider.gameObject.CompareTag("Target")) unit.target = hit.collider.gameObject;
                 else { 
