@@ -180,7 +180,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -205,8 +205,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3634486, y: 0.08229087, z: -0.032249313, w: 0.9274122}
-  m_LocalPosition: {x: 27.921118, y: 6.489217, z: 26.72956}
+  m_LocalRotation: {x: 0.7071068, y: -0.000000022351742, z: -0.0000000037252903, w: 0.7071068}
+  m_LocalPosition: {x: 32.794342, y: 7.307001, z: 37.965145}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -631,8 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 128
-  selectionManager: {fileID: 0}
+    m_Bits: 384
 --- !u!4 &1527704531
 Transform:
   m_ObjectHideFlags: 0
@@ -664,7 +663,7 @@ GameObject:
   - component: {fileID: 1966228880}
   m_Layer: 8
   m_Name: Tree
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -804,7 +803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836898500670687572, guid: 3b30f84a8e92c5247ad02be43b4239d8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 32.965145
+      value: 37.78
       objectReference: {fileID: 0}
     - target: {fileID: 1836898500670687572, guid: 3b30f84a8e92c5247ad02be43b4239d8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -834,9 +833,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4323087304487337160, guid: 3b30f84a8e92c5247ad02be43b4239d8, type: 3}
+      propertyPath: stopDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6286423970339630648, guid: 3b30f84a8e92c5247ad02be43b4239d8, type: 3}
       propertyPath: m_Name
       value: Peasant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113762544544582239, guid: 3b30f84a8e92c5247ad02be43b4239d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -9.280824
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113762544544582239, guid: 3b30f84a8e92c5247ad02be43b4239d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -2.404322
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113762544544582239, guid: 3b30f84a8e92c5247ad02be43b4239d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 179.482
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
