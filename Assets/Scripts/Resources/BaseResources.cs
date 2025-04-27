@@ -10,6 +10,8 @@ public enum ResourceType
 
 public class BaseResources : MonoBehaviour, ICollectable
 {
+    private Coroutine collectCoroutine = null;
+
     public int Amount { get; } = 5;
     public int givenResources = 0;
     public bool resourceIsFull => givenResources >= Amount;
@@ -22,13 +24,24 @@ public class BaseResources : MonoBehaviour, ICollectable
     public void OnCollect(ICollector unitFarming)
     {
         thisUnitFarming = unitFarming;
-        StartCoroutine(Collect());
+        collectCoroutine = StartCoroutine(Collect());
     }
 
     private void OnEndCollect()
     {
         thisUnitFarming.AddResource(resourceType, givenResources);
         Destroy(gameObject);
+    }
+
+    public void StopCollecting()
+    {
+        if (collectCoroutine != null)
+        {
+            Debug.Log("Stopping collect coroutine");
+            StopCoroutine(collectCoroutine);
+            collectCoroutine = null;
+        }
+        thisUnitFarming = null;
     }
 
     private IEnumerator Collect()

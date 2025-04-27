@@ -28,8 +28,7 @@ public class UnitManager : MonoBehaviour
                 if (unit) unit.Move(targetPosition);
                 if(hit.collider.gameObject.CompareTag("Target")) unit.target = hit.collider.gameObject;
                 else { 
-                    unit.target = null;
-                    unit.isAttacking = false;
+                    unit.OnEndAttack();
                 }
             }
         }

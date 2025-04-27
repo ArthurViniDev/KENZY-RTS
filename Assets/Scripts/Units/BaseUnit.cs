@@ -12,7 +12,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 
     public bool isAttacking = false;
     public GameObject target { get; set; }
-    public ICollectable TargetCollectable => target?.GetComponent<ICollectable>();
+    //public ICollectable TargetCollectable => target?.GetComponent<ICollectable>();
 
     [SerializeField] private float stopDistance = 1.0f;
     private GameObject selectionMark;
@@ -40,10 +40,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
                 OnAttack();
             }
         }
-        else if (!target && isAttacking)
-        {
-            isAttacking = false;
-        }
+        else if (!target && isAttacking) OnEndAttack();
 
         if (isAttacking) return;
 
@@ -81,6 +78,11 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         Vector3 lookDirection = (target.transform.position - transform.position);
         transform.rotation = Quaternion.LookRotation(lookDirection);
     }
+    public virtual void OnEndAttack()
+    {
+        target = null;
+        isAttacking = false;
+    }
 
     public void Move(Vector3 targetPosition)
     {
@@ -98,7 +100,6 @@ public class AnimationController : IAnimationController
     {
         this.currentAnimation = currentAnimation;
         this.animator = animator;
-
     }
 
     public void ChangeAnimation(string animationName)
