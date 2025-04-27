@@ -12,6 +12,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 
     public bool isAttacking = false;
     public GameObject target;
+    public ICollectable TargetCollectable => target?.GetComponent<ICollectable>();
 
     [SerializeField] private float stopDistance = 1.0f;
     private GameObject selectionMark;
@@ -33,7 +34,6 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         if (target && !isAttacking)
         {
             float distance = Vector3.Distance(transform.position, target.transform.position);
-            Debug.Log("Distance: " + distance);
             if (distance <= stopDistance)
             {
                 agent.isStopped = true;
@@ -69,7 +69,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         selectionMark.SetActive(false);
     }
 
-    public void OnAttack()
+    public virtual void OnAttack()
     {
         isAttacking = true;
         animationController.ChangeAnimation("Attack");

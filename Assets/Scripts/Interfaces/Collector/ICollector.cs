@@ -1,6 +1,4 @@
-using UnityEngine;
-
 public interface ICollector
 {
-    public void OnCollect();
+    public int resourcesCollected { get; set; }
 }
