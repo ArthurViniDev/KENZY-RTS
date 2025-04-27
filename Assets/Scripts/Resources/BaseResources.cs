@@ -1,16 +1,34 @@
 using System.Collections;
 using UnityEngine;
 
+public enum ResourceType
+{
+    Wood,
+    Stone,
+    Food
+}
+
 public class BaseResources : MonoBehaviour, ICollectable
 {
-    public int Amount { get; } = 10;
+    public int Amount { get; } = 5;
     public int givenResources = 0;
     public bool resourceIsFull => givenResources >= Amount;
 
+    public ICollector thisUnitFarming { get; set; } = null;
+
+    [Header("Resource Type")]
+    public ResourceType resourceType;
+
     public void OnCollect(ICollector unitFarming)
     {
+        thisUnitFarming = unitFarming;
         StartCoroutine(Collect());
-        if (resourceIsFull) unitFarming.resourcesCollected += givenResources;
+    }
+
+    private void OnEndCollect()
+    {
+        thisUnitFarming.AddResource(resourceType, givenResources);
+        Destroy(gameObject);
     }
 
     private IEnumerator Collect()
@@ -19,7 +37,11 @@ public class BaseResources : MonoBehaviour, ICollectable
         {
             yield return new WaitForSeconds(1f);
             givenResources++;
+            if(resourceIsFull)
+            {
+                OnEndCollect();
+                yield break;
+            }
         }
-        yield return null;
     }
 }

@@ -11,7 +11,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
     public float range;
 
     public bool isAttacking = false;
-    public GameObject target;
+    public GameObject target { get; set; }
     public ICollectable TargetCollectable => target?.GetComponent<ICollectable>();
 
     [SerializeField] private float stopDistance = 1.0f;
@@ -39,6 +39,10 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
                 agent.isStopped = true;
                 OnAttack();
             }
+        }
+        else if (!target && isAttacking)
+        {
+            isAttacking = false;
         }
 
         if (isAttacking) return;
