@@ -1568,7 +1568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   givenResources: 0
-  resourceType: 0
+  resourceType: 1
 --- !u!1001 &4358878979659827144
 PrefabInstance:
   m_ObjectHideFlags: 0
