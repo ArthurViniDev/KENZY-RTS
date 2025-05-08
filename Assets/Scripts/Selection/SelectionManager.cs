@@ -16,7 +16,20 @@ public class SelectionManager : MonoBehaviour
                 ISelectable selectedObject = hit.collider.gameObject.GetComponent<ISelectable>();
                 SelectObject(selectedObject);
             }
+            else
+            {
+                DeselectAllObjects();
+            }
         }
+    }
+
+    private void DeselectAllObjects()
+    {
+        foreach (var selectedObject in selectedObjects)
+        {
+            selectedObject.SetSelection(false);
+        }
+        selectedObjects.Clear();
     }
 
     private void SelectObject(ISelectable selectedObject)

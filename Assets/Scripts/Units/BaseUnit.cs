@@ -57,7 +57,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         isAttacking = true;
         animationController.ChangeAnimation("Attack");
 
-        Vector3 lookDirection = (target.transform.position - transform.position);
+        Vector3 lookDirection = target.transform.position - transform.position;
         transform.rotation = Quaternion.LookRotation(lookDirection);
     }
     public virtual void OnEndAttack()
