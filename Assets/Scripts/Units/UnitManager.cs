@@ -8,6 +8,8 @@ public class UnitManager : MonoBehaviour
     void Start()
     {
         selectionManager = FindFirstObjectByType<SelectionManager>();
+        if (selectionManager == null) Debug.LogError("SelectionManager não encontrado!");
+        
     }
 
     void Update()
@@ -22,13 +24,19 @@ public class UnitManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask))
         {
             Vector3 targetPosition = hit.point;
+            
             foreach (ISelectable selectedObject in selectionManager.selectedObjects)
             {
-                BaseUnit unit = (BaseUnit)selectedObject; 
-                if (unit) unit.Move(targetPosition);
-                if(hit.collider.gameObject.CompareTag("Target")) unit.target = hit.collider.gameObject;
-                else { 
-                    unit.OnEndAttack();
+                if (selectedObject is BaseUnit unit)
+                {
+                    unit.Move(targetPosition);
+
+                    if (hit.collider.gameObject.CompareTag("Target"))
+                    {
+                        unit.target = hit.collider.gameObject;
+                        unit.OnAttack();
+                    }
+                    else unit.OnEndAttack();
                 }
             }
         }

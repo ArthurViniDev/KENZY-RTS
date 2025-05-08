@@ -6,6 +6,8 @@ public class SelectionManager : MonoBehaviour
     public List<ISelectable> selectedObjects = new List<ISelectable>();
     [SerializeField] private LayerMask selectableLayerMask;
 
+    private const string deselectButton = "Fire3";
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -14,6 +16,7 @@ public class SelectionManager : MonoBehaviour
             if (Physics.Raycast(ray, out var hit, Mathf.Infinity, selectableLayerMask))
             {
                 ISelectable selectedObject = hit.collider.gameObject.GetComponent<ISelectable>();
+                if (selectedObject == null) return;
                 SelectObject(selectedObject);
             }
             else DeselectAll();
@@ -29,12 +32,14 @@ public class SelectionManager : MonoBehaviour
 
     private void SelectObject(ISelectable selectedObject)
     {
-        if (Input.GetAxis("Fire3") <= 0) DeselectAll();
-        
-        if (selectedObjects.Contains(selectedObject)) {
+        if (selectedObjects.Contains(selectedObject))
+        {
             DeselectObject(selectedObject);
             return;
         }
+
+        if (Input.GetAxis(deselectButton) <= 0) DeselectAll();
+
         selectedObjects.Add(selectedObject);
         selectedObject.SetSelection(true);
     }
