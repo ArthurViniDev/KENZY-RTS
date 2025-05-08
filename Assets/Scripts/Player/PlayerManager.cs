@@ -15,9 +15,8 @@ public class PlayerManager : MonoBehaviour
     public ResourcesText resourcesText;
 
     [Header("Player Stats")]
-    public int woodAmount;
-    public int stoneAmount;
-    public int foodAmount;
+    public int woodAmount, stoneAmount, foodAmount;
+    private int lastWood, lastStone, lastFood;
 
     private void Awake()
     {
@@ -26,6 +25,17 @@ public class PlayerManager : MonoBehaviour
     }
 
     private void Update()
+    {
+        if(lastWood != woodAmount || lastStone != stoneAmount || lastFood != foodAmount)
+        {
+            UpdateResourcesUI();
+            lastWood = woodAmount;
+            lastStone = stoneAmount;
+            lastFood = foodAmount;
+        }
+    }
+
+    private void UpdateResourcesUI()
     {
         resourcesText.woodText.text = "Woods: " + woodAmount.ToString();
         resourcesText.stoneText.text = "Stones: " + stoneAmount.ToString();

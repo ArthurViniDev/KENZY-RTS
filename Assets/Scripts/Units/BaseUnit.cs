@@ -48,15 +48,9 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         else SetState("Idle");
     }
 
-    public void SetState(string state)
-    {
-        animationController.ChangeAnimation(state);
-    }
+    public void SetState(string state) => animationController.ChangeAnimation(state);
 
-    public void SetSelection(bool state)
-    {
-        selectionMark.SetActive(state);
-    }
+    public void SetSelection(bool state) => selectionMark.SetActive(state);
 
     public virtual void OnAttack()
     {
