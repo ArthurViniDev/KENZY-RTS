@@ -19,6 +19,10 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 
     protected IAnimationController animationController;
 
+    public void SetState(string state) => animationController.ChangeAnimation(state);
+
+    public void SetSelection(bool state) => selectionMark.SetActive(state);
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -27,7 +31,15 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public virtual void Update()
+    public virtual void Update() => HandleUnitState();
+
+    private void HandleUnitState()
+    {
+        HandleAttackState();
+        HandleMovementState();
+    }
+
+    private void HandleAttackState()
     {
         if (target && !isAttacking)
         {
@@ -38,8 +50,14 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
                 OnAttack();
             }
         }
-        else if (!target && isAttacking) OnEndAttack();
+        else if (!target && isAttacking)
+        {
+            OnEndAttack();
+        }
+    }
 
+    private void HandleMovementState()
+    {
         if (isAttacking) return;
 
         bool isMoving = agent.velocity.magnitude > 0.1f;
@@ -48,22 +66,21 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         else SetState("Idle");
     }
 
-    public void SetState(string state) => animationController.ChangeAnimation(state);
-
-    public void SetSelection(bool state) => selectionMark.SetActive(state);
-
     public virtual void OnAttack()
     {
-        isAttacking = true;
+        SetAttackState(true);
         animationController.ChangeAnimation("Attack");
 
         Vector3 lookDirection = target.transform.position - transform.position;
         transform.rotation = Quaternion.LookRotation(lookDirection);
     }
-    public virtual void OnEndAttack()
+    
+    public virtual void OnEndAttack() => SetAttackState(false);
+
+    public void SetAttackState(bool attacking)
     {
-        target = null;
-        isAttacking = false;
+        isAttacking = attacking;
+        if(!attacking)target = null;
     }
 
     public void Move(Vector3 targetPosition)
