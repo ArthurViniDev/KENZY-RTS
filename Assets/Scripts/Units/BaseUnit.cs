@@ -50,10 +50,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
                 OnAttack();
             }
         }
-        else if (!target && isAttacking)
-        {
-            OnEndAttack();
-        }
+        else if (!target && isAttacking) OnEndAttack();
     }
 
     private void HandleMovementState()

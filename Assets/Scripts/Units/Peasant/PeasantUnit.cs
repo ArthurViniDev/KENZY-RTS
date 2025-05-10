@@ -7,12 +7,19 @@ public class PeasantUnit : BaseUnit, ICollector
     public int stoneAmount { get; set; }
     public int foodAmount { get; set; }
 
+    public ResourceType resourceType;
+
     private ICollectable currentCollectable;
 
     public override void OnAttack()
     {
-        base.OnAttack();
         currentCollectable = target?.GetComponent<ICollectable>();
+        if(target.GetComponent<BaseResources>().resourceType != resourceType)
+        {
+            Debug.LogWarning("Resource type not corresponding");
+            return;
+        }
+        base.OnAttack();
         currentCollectable?.OnCollect(this);
     }
 
