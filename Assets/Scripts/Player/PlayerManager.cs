@@ -18,6 +18,8 @@ public class PlayerManager : MonoBehaviour
     public int woodAmount, stoneAmount, foodAmount;
     private int lastWood, lastStone, lastFood;
 
+    public int peasantPoints = 1;
+
     private void Awake()
     {
         if (!instance) instance = this;
