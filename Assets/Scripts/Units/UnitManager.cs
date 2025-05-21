@@ -4,40 +4,38 @@ public class UnitManager : MonoBehaviour
 {   
     [SerializeField] private LayerMask groundLayerMask;
     private SelectionManager selectionManager;
+    private Camera camera1;
 
-    void Start()
+    private void Start()
     {
+        camera1 = Camera.main;
         selectionManager = FindFirstObjectByType<SelectionManager>();
         if (selectionManager == null) Debug.LogError("SelectionManager não encontrado!");
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(1)) MovementHandler();
     }
 
     private void MovementHandler()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask))
-        {
-            Vector3 targetPosition = hit.point;
+        if (!camera1) return;
+        var ray = camera1.ScreenPointToRay(Input.mousePosition);
+        if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, groundLayerMask)) return;
+        var targetPosition = hit.point;
             
-            foreach (ISelectable selectedObject in selectionManager.SelectedObjects)
-            {
-                if (selectedObject is BaseUnit unit)
-                {
-                    unit.Move(targetPosition);
+        foreach (var selectedObject in selectionManager.SelectedObjects)
+        {
+            if (selectedObject is not BaseUnit unit) continue;
+            unit.Move(targetPosition);
 
-                    if (hit.collider.gameObject.CompareTag("Target"))
-                    {
-                        unit.target = hit.collider.gameObject;
-                        unit.OnAttack();
-                    }
-                    else unit.OnEndAttack();
-                }
+            if (hit.collider.gameObject.CompareTag("Target"))
+            {
+                unit.Target = hit.collider.gameObject;
+                unit.OnAttack();
             }
+            else unit.OnEndAttack();
         }
     }
 }

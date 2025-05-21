@@ -10,14 +10,14 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
     public float range;
 
     public bool isAttacking = false;
-    public GameObject target { get; set; }
+    public GameObject Target { get; set; }
 
     [SerializeField] private float stopDistance = 1.0f;
     private GameObject selectionMark;
     private NavMeshAgent agent;
     private Animator animator;
 
-    protected IAnimationController animationController;
+    private IAnimationController animationController;
 
     public void SetState(string state) => animationController.ChangeAnimation(state);
 
@@ -41,26 +41,23 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 
     private void HandleAttackState()
     {
-        if (target && !isAttacking)
+        if (Target && !isAttacking)
         {
-            float distance = Vector3.Distance(transform.position, target.transform.position);
-            if (distance <= stopDistance)
-            {
-                agent.isStopped = true;
-                OnAttack();
-            }
+            var distance = Vector3.Distance(transform.position, Target.transform.position);
+            if (!(distance <= stopDistance)) return;
+            agent.isStopped = true;
+            OnAttack();
         }
-        else if (!target && isAttacking) OnEndAttack();
+        else if (!Target && isAttacking) OnEndAttack();
     }
 
     private void HandleMovementState()
     {
         if (isAttacking) return;
 
-        bool isMoving = agent.velocity.magnitude > 0.1f;
+        var isMoving = agent.velocity.magnitude > 0.1f;
 
-        if (isMoving) SetState("Walk");
-        else SetState("Idle");
+        SetState(isMoving ? "Walk" : "Idle");
     }
 
     public virtual void OnAttack()
@@ -68,16 +65,16 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         SetAttackState(true);
         animationController.ChangeAnimation("Attack");
 
-        Vector3 lookDirection = target.transform.position - transform.position;
+        Vector3 lookDirection = Target.transform.position - transform.position;
         transform.rotation = Quaternion.LookRotation(lookDirection);
     }
     
     public virtual void OnEndAttack() => SetAttackState(false);
 
-    public void SetAttackState(bool attacking)
+    private void SetAttackState(bool attacking)
     {
         isAttacking = attacking;
-        if(!attacking)target = null;
+        if(!attacking)Target = null;
     }
 
     public void Move(Vector3 targetPosition)
@@ -89,7 +86,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 
 public class AnimationController : IAnimationController
 {
-    private Animator animator;
+    private readonly Animator animator;
     private string currentAnimation;
 
     public AnimationController(Animator animator, string currentAnimation = "")

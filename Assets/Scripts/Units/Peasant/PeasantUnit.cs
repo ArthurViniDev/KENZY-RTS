@@ -13,8 +13,8 @@ public class PeasantUnit : BaseUnit, ICollector
 
     public override void OnAttack()
     {
-        currentCollectable = target?.GetComponent<ICollectable>();
-        if(target.GetComponent<BaseResources>().resourceType != resourceType)
+        currentCollectable = Target?.GetComponent<ICollectable>();
+        if(Target.GetComponent<BaseResources>().resourceType != resourceType)
         {
             Debug.LogWarning("Resource type not corresponding");
             return;
@@ -25,7 +25,7 @@ public class PeasantUnit : BaseUnit, ICollector
 
     public override void OnEndAttack()
     {
-        if (currentCollectable == null || !target) 
+        if (currentCollectable == null || !Target) 
         {
             isAttacking = false;
             return;

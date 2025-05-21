@@ -7,12 +7,10 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private LayerMask selectableLayerMask;
     private Camera camera1;
 
-    private const string deselectButton = "Fire3";
+    private const string DeselectButton = "Fire3";
 
-    private void Start()
-    {
-        camera1 = Camera.main;
-    }
+    private void Start() => camera1 = Camera.main;
+    
 
     private void Update()
     {
@@ -47,7 +45,7 @@ public class SelectionManager : MonoBehaviour
             return;
         }
 
-        if (Input.GetAxis(deselectButton) <= 0) DeselectAll();
+        if (Input.GetAxis(DeselectButton) <= 0) DeselectAll();
 
         SelectedObjects.Add(selectedObject);
         selectedObject.SetSelection(true);

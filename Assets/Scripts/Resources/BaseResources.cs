@@ -14,7 +14,7 @@ public class BaseResources : MonoBehaviour, ICollectable
 
     public int Amount { get; } = 5;
     public int givenResources = 0;
-    public bool resourceIsFull => givenResources >= Amount;
+    private bool ResourceIsFull => givenResources >= Amount;
 
     public ICollector thisUnitFarming { get; set; } = null;
 
@@ -49,7 +49,7 @@ public class BaseResources : MonoBehaviour, ICollectable
         {
             yield return new WaitForSeconds(1f);
             givenResources++;
-            if(resourceIsFull)
+            if(ResourceIsFull)
             {
                 OnEndCollect();
                 yield break;

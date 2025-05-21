@@ -8,12 +8,9 @@ public class PeasantBaseBuild : MonoBehaviour
     public int peasantAmount = 0;
     public int maxPeasantAmount = 2;
 
-    void Update()
-    {
-        AddPeasant();
-    }
+    private void Update() => AddPeasant();
     
-    public void AddPeasant()
+    private void AddPeasant()
     {
         if (peasantAmount < maxPeasantAmount && PlayerManager.instance.peasantPoints > 0)
         {
