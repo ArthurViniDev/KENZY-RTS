@@ -28,13 +28,11 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if(lastWood != woodAmount || lastStone != stoneAmount || lastFood != foodAmount)
-        {
-            UpdateResourcesUI();
-            lastWood = woodAmount;
-            lastStone = stoneAmount;
-            lastFood = foodAmount;
-        }
+        if (lastWood == woodAmount && lastStone == stoneAmount && lastFood == foodAmount) return;
+        UpdateResourcesUI();
+        lastWood = woodAmount;
+        lastStone = stoneAmount;
+        lastFood = foodAmount;
     }
 
     private void UpdateResourcesUI()

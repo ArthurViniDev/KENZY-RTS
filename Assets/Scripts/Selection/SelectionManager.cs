@@ -3,36 +3,45 @@ using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
 {
-    public List<ISelectable> selectedObjects = new List<ISelectable>();
+    public readonly List<ISelectable> SelectedObjects = new List<ISelectable>();
     [SerializeField] private LayerMask selectableLayerMask;
+    private Camera camera1;
 
     private const string deselectButton = "Fire3";
 
+    private void Start()
+    {
+        camera1 = Camera.main;
+    }
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) SelectionHandler();
+    }
+
+    private void SelectionHandler()
+    {
+        if (!camera1) return;
+        var ray = camera1.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit, Mathf.Infinity, selectableLayerMask))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit, Mathf.Infinity, selectableLayerMask))
-            {
-                ISelectable selectedObject = hit.collider.gameObject.GetComponent<ISelectable>();
-                if (selectedObject == null) return;
-                SelectObject(selectedObject);
-            }
-            else DeselectAll();
+            var selectedObject = hit.collider.gameObject.GetComponent<ISelectable>();
+            if (selectedObject == null) return;
+            SelectObject(selectedObject);
         }
+        else DeselectAll();
     }
 
     private void DeselectAll()
     {
-        foreach (var selectedObject in selectedObjects) selectedObject.SetSelection(false);
+        foreach (var selectedObject in SelectedObjects) selectedObject.SetSelection(false);
         
-        selectedObjects.Clear();
+        SelectedObjects.Clear();
     }
 
     private void SelectObject(ISelectable selectedObject)
     {
-        if (selectedObjects.Contains(selectedObject))
+        if (SelectedObjects.Contains(selectedObject))
         {
             DeselectObject(selectedObject);
             return;
@@ -40,14 +49,14 @@ public class SelectionManager : MonoBehaviour
 
         if (Input.GetAxis(deselectButton) <= 0) DeselectAll();
 
-        selectedObjects.Add(selectedObject);
+        SelectedObjects.Add(selectedObject);
         selectedObject.SetSelection(true);
     }
 
     private void DeselectObject(ISelectable selectedObject)
     {
-        if (!selectedObjects.Contains(selectedObject)) return;
-        selectedObjects.Remove(selectedObject);
+        if (!SelectedObjects.Contains(selectedObject)) return;
+        SelectedObjects.Remove(selectedObject);
         selectedObject.SetSelection(false);
     }
 }

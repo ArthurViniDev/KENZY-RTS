@@ -9,7 +9,6 @@ public class UnitManager : MonoBehaviour
     {
         selectionManager = FindFirstObjectByType<SelectionManager>();
         if (selectionManager == null) Debug.LogError("SelectionManager não encontrado!");
-        
     }
 
     void Update()
@@ -25,7 +24,7 @@ public class UnitManager : MonoBehaviour
         {
             Vector3 targetPosition = hit.point;
             
-            foreach (ISelectable selectedObject in selectionManager.selectedObjects)
+            foreach (ISelectable selectedObject in selectionManager.SelectedObjects)
             {
                 if (selectedObject is BaseUnit unit)
                 {
