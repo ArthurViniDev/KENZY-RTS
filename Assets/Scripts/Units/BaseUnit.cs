@@ -47,7 +47,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         if (Target)
         {
             var distance = Vector3.Distance(transform.position, Target.transform.position);
-            else
+            if (distance < stopDistance)
             {
                 agent.isStopped = true;
                 OnAttack();
