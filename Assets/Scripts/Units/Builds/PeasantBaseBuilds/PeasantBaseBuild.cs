@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PeasantBaseBuild : MonoBehaviour
@@ -14,6 +15,7 @@ public class PeasantBaseBuild : MonoBehaviour
     {
         if (peasantAmount < maxPeasantAmount && PlayerManager.instance.peasantPoints > 0)
         {
+            peasantPrefab.GetComponent<PeasantUnit>().resourceType = resourceType;
             peasantAmount++;
             PlayerManager.instance.peasantPoints--;
             Instantiate(peasantPrefab, peasantSpawnPoint.transform.position, Quaternion.identity);

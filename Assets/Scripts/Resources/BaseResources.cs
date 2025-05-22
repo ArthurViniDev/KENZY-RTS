@@ -23,8 +23,11 @@ public class BaseResources : MonoBehaviour, ICollectable
 
     public void OnCollect(ICollector unitFarming)
     {
-        thisUnitFarming = unitFarming;
-        collectCoroutine = StartCoroutine(Collect());
+        if (collectCoroutine == null)
+        {
+            thisUnitFarming = unitFarming;
+            collectCoroutine = StartCoroutine(Collect());
+        }
     }
 
     private void OnEndCollect()

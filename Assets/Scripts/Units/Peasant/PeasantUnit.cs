@@ -13,17 +13,23 @@ public class PeasantUnit : BaseUnit, ICollector
 
     public override void OnAttack()
     {
-        currentCollectable = Target?.GetComponent<ICollectable>();
-        if(Target.GetComponent<BaseResources>().resourceType != resourceType)
+        if (!Target) return;
+
+        float distance = Vector3.Distance(transform.position, Target.transform.position);
+        if (distance > stopDistance)
         {
-            Debug.LogWarning("Resource type not corresponding");
             return;
         }
-        base.OnAttack();
+        currentCollectable = Target?.GetComponent<ICollectable>();
+        if(Target?.GetComponent<BaseResources>().resourceType != resourceType)
+        {
+            return;
+        }
         currentCollectable?.OnCollect(this);
+        base.OnAttack();
     }
 
-    public override void OnEndAttack()
+    public override void EndAttack()
     {
         if (currentCollectable == null || !Target) 
         {
@@ -33,7 +39,7 @@ public class PeasantUnit : BaseUnit, ICollector
         
         currentCollectable.StopCollecting();
         currentCollectable = null;
-        base.OnEndAttack();
+        base.EndAttack();
     }
 
     public void AddResource(ResourceType resourceType, int amount)

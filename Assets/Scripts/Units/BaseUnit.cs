@@ -7,12 +7,12 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 {
     [Header("Unit Stats")]
     public int health;
-    public float range;
+    //public float range;
 
     public bool isAttacking = false;
     public GameObject Target { get; set; }
 
-    [SerializeField] private float stopDistance = 1.0f;
+    [SerializeField] protected float stopDistance = 1.0f;
     private GameObject selectionMark;
     private NavMeshAgent agent;
     private Animator animator;
@@ -31,7 +31,10 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public virtual void Update() => HandleUnitState();
+    public void Update()
+    {
+        HandleUnitState();
+    }
 
     private void HandleUnitState()
     {
@@ -41,14 +44,16 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 
     private void HandleAttackState()
     {
-        if (Target && !isAttacking)
+        if (Target)
         {
             var distance = Vector3.Distance(transform.position, Target.transform.position);
-            if (!(distance <= stopDistance)) return;
-            agent.isStopped = true;
-            OnAttack();
+            else
+            {
+                agent.isStopped = true;
+                OnAttack();
+            }
         }
-        else if (!Target && isAttacking) OnEndAttack();
+        else if (!Target && isAttacking) EndAttack();
     }
 
     private void HandleMovementState()
@@ -65,11 +70,11 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         SetAttackState(true);
         animationController.ChangeAnimation("Attack");
 
-        Vector3 lookDirection = Target.transform.position - transform.position;
-        transform.rotation = Quaternion.LookRotation(lookDirection);
+        var lookDirection = Target.transform.position - transform.position;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.deltaTime * 5f);
     }
-    
-    public virtual void OnEndAttack() => SetAttackState(false);
+
+    public virtual void EndAttack() => SetAttackState(false);
 
     private void SetAttackState(bool attacking)
     {

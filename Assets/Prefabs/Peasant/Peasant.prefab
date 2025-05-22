@@ -9706,12 +9706,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  speed: 0
-  range: 0
-  selectionMark: {fileID: 0}
-  agent: {fileID: 0}
-  animator: {fileID: 0}
-  currentAnimation: 
+  isAttacking: 0
+  stopDistance: 2
+  resourceType: 0
 --- !u!195 &1657041185709672890
 NavMeshAgent:
   m_ObjectHideFlags: 0

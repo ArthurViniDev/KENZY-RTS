@@ -10,7 +10,7 @@ public class UnitManager : MonoBehaviour
     {
         camera1 = Camera.main;
         selectionManager = FindFirstObjectByType<SelectionManager>();
-        if (selectionManager == null) Debug.LogError("SelectionManager não encontrado!");
+        if (!selectionManager) Debug.LogError("SelectionManager não encontrado!");
     }
 
     private void Update()
@@ -35,7 +35,7 @@ public class UnitManager : MonoBehaviour
                 unit.Target = hit.collider.gameObject;
                 unit.OnAttack();
             }
-            else unit.OnEndAttack();
+            else unit.EndAttack();
         }
     }
 }
