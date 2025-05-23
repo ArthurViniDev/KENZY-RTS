@@ -10,7 +10,6 @@ public class SelectionManager : MonoBehaviour
     private const string DeselectButton = "Fire3";
 
     private void Start() => camera1 = Camera.main;
-    
 
     private void Update()
     {

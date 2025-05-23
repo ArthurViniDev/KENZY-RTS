@@ -7,7 +7,6 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
 {
     [Header("Unit Stats")]
     public int health;
-    //public float range;
 
     public bool isAttacking = false;
     public GameObject Target { get; set; }
@@ -31,10 +30,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public void Update()
-    {
-        HandleUnitState();
-    }
+    public void Update() => HandleUnitState();
 
     private void HandleUnitState()
     {
@@ -79,7 +75,7 @@ public class BaseUnit : MonoBehaviour, ISelectable, IWalkable
     private void SetAttackState(bool attacking)
     {
         isAttacking = attacking;
-        if(!attacking)Target = null;
+        if (!attacking) Target = null;
     }
 
     public void Move(Vector3 targetPosition)

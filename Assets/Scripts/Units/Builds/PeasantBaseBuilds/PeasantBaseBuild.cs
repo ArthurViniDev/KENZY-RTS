@@ -1,13 +1,20 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PeasantBaseBuild : MonoBehaviour
-{
+public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
+{    
     [SerializeField] private GameObject peasantPrefab;
     [SerializeField] private GameObject peasantSpawnPoint;
-    public ResourceType resourceType;
+
     public int peasantAmount = 0;
     public int maxPeasantAmount = 2;
+
+    public ResourceType resourceType;
+    public GameObject peasantBaseBuildWindow { get; set; }
+
+    private void Awake()
+    {
+        peasantBaseBuildWindow = transform.GetChild(0).gameObject;
+    }
 
     private void Update() => AddPeasant();
     
@@ -20,5 +27,14 @@ public class PeasantBaseBuild : MonoBehaviour
             PlayerManager.instance.peasantPoints--;
             Instantiate(peasantPrefab, peasantSpawnPoint.transform.position, Quaternion.identity);
         }
+    }
+
+    public void OnBuildSelect()
+    {
+        Debug.Log("Build selected: " + gameObject.name);
+    }
+    public  void OnBuildDeselect()
+    {
+        Debug.Log("Build deselected: " + gameObject.name);
     }
 }
