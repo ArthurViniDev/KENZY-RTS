@@ -11,10 +11,8 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
     public ResourceType resourceType;
     public GameObject peasantBaseBuildWindow { get; set; }
 
-    private void Awake()
-    {
-        peasantBaseBuildWindow = transform.GetChild(0).gameObject;
-    }
+    private void Awake() => peasantBaseBuildWindow = transform.GetChild(0).gameObject;
+    
 
     private void Update() => AddPeasant();
     
