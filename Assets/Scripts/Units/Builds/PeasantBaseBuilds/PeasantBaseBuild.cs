@@ -29,10 +29,10 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
 
     public void OnBuildSelect()
     {
-        Debug.Log("Build selected: " + gameObject.name);
+        // Show the build window and set the build as selected
     }
     public  void OnBuildDeselect()
     {
-        Debug.Log("Build deselected: " + gameObject.name);
+        // Hide the build window and set the build as unselected
     }
 }
