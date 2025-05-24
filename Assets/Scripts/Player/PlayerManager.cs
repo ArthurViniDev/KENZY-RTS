@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     private int lastWood, lastStone, lastFood;
 
     public int peasantPoints = 1;
+    public int windowsOpened = 0;
 
     private void Awake()
     {

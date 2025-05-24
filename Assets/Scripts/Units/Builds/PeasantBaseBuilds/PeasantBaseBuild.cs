@@ -12,9 +12,10 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
     public GameObject peasantBaseBuildWindow { get; set; }
 
     private void Awake() => peasantBaseBuildWindow = transform.GetChild(0).gameObject;
-
-
     private void Update() => AddPeasant();
+    public void OnBuildSelect() => peasantBaseBuildWindow.gameObject.SetActive(true);
+    public void OnBuildDeselect() => peasantBaseBuildWindow.gameObject.SetActive(false);
+
 
     private void AddPeasant()
     {
@@ -26,10 +27,4 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
             Instantiate(peasantPrefab, peasantSpawnPoint.transform.position, Quaternion.identity);
         }
     }
-
-    public void OnBuildSelect()
-    {
-        peasantBaseBuildWindow.gameObject.SetActive(true);
-    }
-    public void OnBuildDeselect() => peasantBaseBuildWindow.gameObject.SetActive(false);
 }
