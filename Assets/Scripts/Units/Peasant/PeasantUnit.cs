@@ -16,27 +16,23 @@ public class PeasantUnit : BaseUnit, ICollector
         if (!Target) return;
 
         float distance = Vector3.Distance(transform.position, Target.transform.position);
-        if (distance > stopDistance)
-        {
-            return;
-        }
+        if (distance > stopDistance) return;
+
         currentCollectable = Target?.GetComponent<ICollectable>();
-        if(Target?.GetComponent<BaseResources>().resourceType != resourceType)
-        {
-            return;
-        }
+        if (Target?.GetComponent<BaseResources>().resourceType != resourceType) return;
+
         currentCollectable?.OnCollect(this);
         base.OnAttack();
     }
 
     public override void EndAttack()
     {
-        if (currentCollectable == null || !Target) 
+        if (currentCollectable == null || !Target)
         {
             isAttacking = false;
             return;
         }
-        
+
         currentCollectable.StopCollecting();
         currentCollectable = null;
         base.EndAttack();
@@ -57,7 +53,7 @@ public class PeasantUnit : BaseUnit, ICollector
                 break;
             default:
                 Debug.LogError("Resource type not found");
-            break;
+                break;
         }
         woodAmount = 0; stoneAmount = 0; foodAmount = 0;
     }
