@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
-{    
+{
     [SerializeField] private GameObject peasantPrefab;
     [SerializeField] private GameObject peasantSpawnPoint;
 
@@ -12,10 +12,10 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
     public GameObject peasantBaseBuildWindow { get; set; }
 
     private void Awake() => peasantBaseBuildWindow = transform.GetChild(0).gameObject;
-    
+
 
     private void Update() => AddPeasant();
-    
+
     private void AddPeasant()
     {
         if (peasantAmount < maxPeasantAmount && PlayerManager.instance.peasantPoints > 0)
@@ -29,10 +29,7 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
 
     public void OnBuildSelect()
     {
-        // Show the build window and set the build as selected
+        peasantBaseBuildWindow.gameObject.SetActive(true);
     }
-    public  void OnBuildDeselect()
-    {
-        // Hide the build window and set the build as unselected
-    }
+    public void OnBuildDeselect() => peasantBaseBuildWindow.gameObject.SetActive(false);
 }
