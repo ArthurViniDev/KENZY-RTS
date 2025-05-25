@@ -7,10 +7,12 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
 
     [Header("Player Stats")]
-    public int woodAmount, stoneAmount, foodAmount;
     public int peasantPoints = 1;
     public int windowsOpened = 0;
     private int lastWood, lastStone, lastFood;
+
+    [Header("Player Resource Stats")]
+    public int woodAmount, stoneAmount, foodAmount;
 
     [Header("Resource UI")]
     public TextMeshProUGUI woodText;
@@ -34,8 +36,8 @@ public class PlayerManager : MonoBehaviour
 
     private void UpdateResourcesUI()
     {
-        woodText.text = "Woods: " + woodAmount.ToString();
-        stoneText.text = "Stones: " + stoneAmount.ToString();
-        foodText.text = "Foods: " + foodAmount.ToString();
+        woodText.text = $"Woods: {woodAmount}";
+        stoneText.text = $"Stones: {stoneAmount}";
+        foodText.text = $"Foods: {foodAmount}";
     }
 }
