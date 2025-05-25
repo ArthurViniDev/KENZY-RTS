@@ -1,25 +1,21 @@
 using TMPro;
 using UnityEngine;
 
-[System.Serializable]
-public class ResourcesText
-{
-    public TextMeshProUGUI woodText;
-    public TextMeshProUGUI stoneText;
-    public TextMeshProUGUI foodText;
-}
-
 public class PlayerManager : MonoBehaviour
 {
+    // Singleton pattern
     public static PlayerManager instance;
-    public ResourcesText resourcesText;
 
     [Header("Player Stats")]
     public int woodAmount, stoneAmount, foodAmount;
-    private int lastWood, lastStone, lastFood;
-
     public int peasantPoints = 1;
     public int windowsOpened = 0;
+    private int lastWood, lastStone, lastFood;
+
+    [Header("Resource UI")]
+    public TextMeshProUGUI woodText;
+    public TextMeshProUGUI stoneText;
+    public TextMeshProUGUI foodText;
 
     private void Awake()
     {
@@ -38,8 +34,8 @@ public class PlayerManager : MonoBehaviour
 
     private void UpdateResourcesUI()
     {
-        resourcesText.woodText.text = "Woods: " + woodAmount.ToString();
-        resourcesText.stoneText.text = "Stones: " + stoneAmount.ToString();
-        resourcesText.foodText.text = "Foods: " + foodAmount.ToString();
+        woodText.text = "Woods: " + woodAmount.ToString();
+        stoneText.text = "Stones: " + stoneAmount.ToString();
+        foodText.text = "Foods: " + foodAmount.ToString();
     }
 }

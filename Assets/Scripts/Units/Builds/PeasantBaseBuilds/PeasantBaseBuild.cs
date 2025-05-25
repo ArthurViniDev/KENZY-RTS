@@ -13,9 +13,11 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
 
     private void Awake() => peasantBaseBuildWindow = transform.GetChild(0).gameObject;
     private void Update() => AddPeasant();
+    public void SellBuild()
+    {// Implement sell build logic here \\
+    }
     public void OnBuildSelect() => peasantBaseBuildWindow.gameObject.SetActive(true);
     public void OnBuildDeselect() => peasantBaseBuildWindow.gameObject.SetActive(false);
-
 
     private void AddPeasant()
     {
