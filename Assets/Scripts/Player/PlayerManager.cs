@@ -1,6 +1,21 @@
 using TMPro;
 using UnityEngine;
 
+[System.Serializable]
+public struct Resources
+{
+    public int wood;
+    public int stone;
+    public int food;
+
+    public Resources(int wood, int stone, int food)
+    {
+        this.wood = wood;
+        this.stone = stone;
+        this.food = food;
+    }
+}
+
 public class PlayerManager : MonoBehaviour
 {
     // Singleton pattern
@@ -9,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Player Stats")]
     public int peasantPoints = 1;
     public int windowsOpened = 0;
-    private int lastWood, lastStone, lastFood;
+    //private int lastWood, lastStone, lastFood;
 
     [Header("Player Resource Stats")]
     public int woodAmount, stoneAmount, foodAmount;
@@ -25,33 +40,36 @@ public class PlayerManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    public Resources playerResources;
+    private Resources lastResources;
+
     private void Update()
     {
-        if (lastWood == woodAmount && lastStone == stoneAmount && lastFood == foodAmount) return;
+        if (lastResources.wood == playerResources.wood &&
+            lastResources.stone == playerResources.stone &&
+            lastResources.food == playerResources.food) return;
+
         UpdateResourcesUI();
-        lastWood = woodAmount;
-        lastStone = stoneAmount;
-        lastFood = foodAmount;
+        lastResources = playerResources;
     }
 
     private void UpdateResourcesUI()
     {
-        woodText.text = $"Woods: {woodAmount}";
-        stoneText.text = $"Stones: {stoneAmount}";
-        foodText.text = $"Foods: {foodAmount}";
+        woodText.text = $"Woods: {playerResources.wood}";
+        stoneText.text = $"Stones: {playerResources.stone}";
+        foodText.text = $"Foods: {playerResources.food}";
     }
 
-    public bool HasEnoughResources(BuildCost cost)
+    public bool HasEnoughResources(Resources cost)
     {
-        return woodAmount >= cost.wood &&
-               stoneAmount >= cost.stone &&
-               foodAmount >= cost.food;
+        return playerResources.wood >= cost.wood &&
+                playerResources.stone >= cost.stone &&
+                playerResources.food >= cost.food;
     }
-    public void SpendResources(BuildCost cost)
+    public void SpendResources(Resources cost)
     {
-        woodAmount -= cost.wood;
-        stoneAmount -= cost.stone;
-        foodAmount -= cost.food;
+        playerResources.wood -= cost.wood;
+        playerResources.stone -= cost.stone;
+        playerResources.food -= cost.food;
     }
 }
-// This class manages the player's resources and UI updates.

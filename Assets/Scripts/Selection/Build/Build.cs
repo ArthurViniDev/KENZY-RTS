@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Build : MonoBehaviour
@@ -16,9 +15,10 @@ public class Build : MonoBehaviour
             GameObject selectedBuilding = buildSelectionUI.selectedBuildingPrefab;
             if (!selectedBuilding) return;
             var baseBuild = selectedBuilding.GetComponent<BaseBuild>();
-            if (PlayerManager.instance.woodAmount < baseBuild.buildPrice.wood ||
-                PlayerManager.instance.stoneAmount < baseBuild.buildPrice.stone ||
-                PlayerManager.instance.foodAmount < baseBuild.buildPrice.food)
+            var playerResources = PlayerManager.instance.playerResources;
+            if (playerResources.wood < baseBuild.buildPrice.wood ||
+                playerResources.stone < baseBuild.buildPrice.stone ||
+                playerResources.food < baseBuild.buildPrice.food)
             {
                 return;
             }

@@ -43,13 +43,13 @@ public class PeasantUnit : BaseUnit, ICollector
         switch (resourceType)
         {
             case ResourceType.Wood:
-                PlayerManager.instance.woodAmount += amount;
+                PlayerManager.instance.playerResources.wood += amount;
                 break;
             case ResourceType.Stone:
-                PlayerManager.instance.stoneAmount += amount;
+                PlayerManager.instance.playerResources.stone += amount;
                 break;
             case ResourceType.Food:
-                PlayerManager.instance.foodAmount += amount;
+                PlayerManager.instance.playerResources.food += amount;
                 break;
             default:
                 Debug.LogError("Resource type not found");
