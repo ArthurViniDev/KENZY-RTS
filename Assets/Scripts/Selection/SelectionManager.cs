@@ -11,10 +11,7 @@ public class SelectionManager : MonoBehaviour
 
     private void Start() => camera1 = Camera.main;
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) SelectionHandler();
-    }
+    private void Update() { if (Input.GetMouseButtonDown(0)) SelectionHandler(); }
 
     private void SelectionHandler()
     {
@@ -32,7 +29,7 @@ public class SelectionManager : MonoBehaviour
     private void DeselectAll()
     {
         foreach (var selectedObject in SelectedObjects) selectedObject.SetSelection(false);
-        
+
         SelectedObjects.Clear();
     }
 

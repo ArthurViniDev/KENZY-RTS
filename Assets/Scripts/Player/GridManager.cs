@@ -4,7 +4,6 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     private Vector3 lastPosition;
-
     [SerializeField] private LayerMask groundLayerMask;
 
     public Vector3 GetMouseWorldPosition()
