@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class Buildable
+public interface IBuildable
 {
-    
+
 }

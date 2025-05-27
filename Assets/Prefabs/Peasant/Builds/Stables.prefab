@@ -284,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3282596421989309476
 Transform:
   m_ObjectHideFlags: 0
@@ -458,6 +458,7 @@ GameObject:
   - component: {fileID: 8347624291179892278}
   - component: {fileID: 3727628993334205809}
   - component: {fileID: 3935201272930865007}
+  - component: {fileID: 5792368053467381425}
   m_Layer: 0
   m_Name: Stables
   m_TagString: BuildSelectable
@@ -573,6 +574,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.713956, y: 6.748252, z: 5.374171}
   m_Center: {x: -0.060944915, y: -0.061301485, z: 1.9539552}
+--- !u!114 &5792368053467381425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5823332241237531086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ad80ab213ce4a49a67c2b327f12b3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildTime: 5
+  buildingPrefab: {fileID: 0}
+  buildPrice:
+    wood: 1
+    stone: 1
+    food: 1
 --- !u!1 &5931757400881118242
 GameObject:
   m_ObjectHideFlags: 0

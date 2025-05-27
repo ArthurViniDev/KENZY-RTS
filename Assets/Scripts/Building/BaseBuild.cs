@@ -18,19 +18,6 @@ public struct BuildCost
 public class BaseBuild : MonoBehaviour
 {
     [HideInInspector] public float buildTime = 5f;
-    [HideInInspector] public GameObject buildingPrefab;
+    public GameObject buildingPrefab;
     public BuildCost buildPrice;
-
-    public virtual void StartBuild()
-    {
-        if (PlayerManager.instance.HasEnoughResources(buildPrice))
-        {
-            PlayerManager.instance.SpendResources(buildPrice);
-            Debug.Log($"Started building {buildingPrefab.name} for {buildPrice.wood} wood, {buildPrice.stone} stone, and {buildPrice.food} food.");
-        }
-        else
-        {
-            Debug.Log("Not enough resources to build.");
-        }
-    }
 }

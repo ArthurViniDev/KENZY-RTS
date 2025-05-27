@@ -150,9 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peasantPoints: 1
   windowsOpened: 0
-  woodAmount: 0
-  stoneAmount: 0
-  foodAmount: 0
+  woodAmount: 1
+  stoneAmount: 1
+  foodAmount: 1
   woodText: {fileID: 528031712}
   stoneText: {fileID: 1321848497}
   foodText: {fileID: 534850057}
@@ -1383,7 +1383,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: 'Stable
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1792,7 +1794,7 @@ GameObject:
   - component: {fileID: 1456722388}
   - component: {fileID: 1456722387}
   m_Layer: 5
-  m_Name: Stable
+  m_Name: StableButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1861,7 +1863,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1456722388}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1887067578}
+        m_TargetAssemblyTypeName: BuildSelectionUI, Assembly-CSharp
+        m_MethodName: selectStablePrefab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1456722388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1875,7 +1889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.69909585, g: 0.9056604, b: 0.6279815, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2156,6 +2170,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1887067577}
+  - component: {fileID: 1887067579}
+  - component: {fileID: 1887067578}
   m_Layer: 0
   m_Name: BuildingSystem
   m_TagString: Untagged
@@ -2183,6 +2199,34 @@ Transform:
   - {fileID: 282256187}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1887067578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887067576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd7884cd0750c214499bf9f5dd085323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingPrefabs:
+  - {fileID: 1912896585}
+  selectedBuildingPrefab: {fileID: 0}
+--- !u!114 &1887067579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887067576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da741a61386f2984eb7e05a5d29f8b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CursorIndicatorParent: {fileID: 1325913360}
 --- !u!1 &1889561687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,6 +2292,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1912896585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5823332241237531086, guid: c9006955931ee8b40a71deec162f0710, type: 3}
+  m_PrefabInstance: {fileID: 3326473466909931916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1697720539117439502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2355,10 +2404,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1031627507255278175, guid: c9006955931ee8b40a71deec162f0710, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2482065115762170488, guid: c9006955931ee8b40a71deec162f0710, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5823332241237531086, guid: c9006955931ee8b40a71deec162f0710, type: 3}
