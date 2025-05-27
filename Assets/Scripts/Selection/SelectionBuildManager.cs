@@ -16,7 +16,6 @@ public class SelectionBuildManager : MonoBehaviour
             {
                 IBuildSelectable buildSelectable = hit.transform.GetComponent<IBuildSelectable>();
                 bool isActive = buildSelectable.peasantBaseBuildWindow.activeSelf;
-
                 if (isActive) buildSelectable.OnBuildDeselect();
                 else if (PlayerManager.instance.windowsOpened == 0) buildSelectable.OnBuildSelect();
             }

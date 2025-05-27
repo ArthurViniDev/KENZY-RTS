@@ -13,15 +13,24 @@ public class Build : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            var selectedBuilding = buildSelectionUI.selectedBuildingPrefab;
+            GameObject selectedBuilding = buildSelectionUI.selectedBuildingPrefab;
             if (!selectedBuilding) return;
-            BuildConstruction(selectedBuilding);
+            else if (PlayerManager.instance.woodAmount < selectedBuilding.GetComponent<BaseBuild>().buildPrice.wood ||
+                    PlayerManager.instance.stoneAmount < selectedBuilding.GetComponent<BaseBuild>().buildPrice.stone ||
+                    PlayerManager.instance.foodAmount < selectedBuilding.GetComponent<BaseBuild>().buildPrice.food)
+            { return; }
 
+            BuildConstruction(selectedBuilding);
         }
     }
 
     private void BuildConstruction(GameObject build)
     {
-        Instantiate(build, CursorIndicatorParent.transform.position, CursorIndicatorParent.transform.rotation);
+        BaseBuild baseBuild = build.GetComponent<BaseBuild>();
+        GameObject buildCreated = Instantiate(build, CursorIndicatorParent.transform.position, CursorIndicatorParent.transform.rotation);
+        buildCreated.transform.rotation = Quaternion.Euler(-90f, buildCreated.transform.rotation.eulerAngles.y, buildCreated.transform.rotation.eulerAngles.z);
+        PlayerManager.instance.woodAmount -= baseBuild.buildPrice.wood;
+        PlayerManager.instance.stoneAmount -= baseBuild.buildPrice.stone;
+        PlayerManager.instance.foodAmount -= baseBuild.buildPrice.food;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
@@ -7,6 +8,7 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
 
     public int peasantAmount = 0;
     public int maxPeasantAmount = 2;
+    public bool canOpenWindow = false;
 
     public ResourceType resourceType;
     public GameObject peasantBaseBuildWindow { get; set; }
@@ -16,8 +18,27 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
     public void SellBuild()
     {// Implement sell build logic here \\
     }
-    public void OnBuildSelect() => peasantBaseBuildWindow.gameObject.SetActive(true);
-    public void OnBuildDeselect() => peasantBaseBuildWindow.gameObject.SetActive(false);
+
+    void Start()
+    {
+        StartCoroutine(openableWindow());
+    }
+
+    private IEnumerator openableWindow()
+    {
+        yield return new WaitForSeconds(0.2f);
+        canOpenWindow = true;
+    }
+    public void OnBuildSelect()
+    {
+        if (!canOpenWindow) return;
+        peasantBaseBuildWindow.gameObject.SetActive(true);
+    }
+    public void OnBuildDeselect()
+    {
+        if (!canOpenWindow) return;
+        peasantBaseBuildWindow.gameObject.SetActive(false);
+    }
 
     private void AddPeasant()
     {
