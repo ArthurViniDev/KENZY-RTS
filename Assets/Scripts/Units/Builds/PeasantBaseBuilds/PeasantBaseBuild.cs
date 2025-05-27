@@ -19,6 +19,7 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
     {// Implement sell build logic here \\
     }
 
+    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(openableWindow());
