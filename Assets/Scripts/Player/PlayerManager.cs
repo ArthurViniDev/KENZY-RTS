@@ -24,7 +24,6 @@ public class PlayerManager : MonoBehaviour
     [Header("Player Stats")]
     public int peasantPoints = 1;
     public int windowsOpened = 0;
-    //private int lastWood, lastStone, lastFood;
 
     [Header("Player Resource Stats")]
     public int woodAmount, stoneAmount, foodAmount;

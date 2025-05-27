@@ -31,8 +31,8 @@ public class Build : MonoBehaviour
         BaseBuild baseBuild = build.GetComponent<BaseBuild>();
         GameObject buildCreated = Instantiate(build, CursorIndicatorParent.transform.position, CursorIndicatorParent.transform.rotation);
         buildCreated.transform.rotation = Quaternion.Euler(-90f, buildCreated.transform.rotation.eulerAngles.y, buildCreated.transform.rotation.eulerAngles.z);
-        PlayerManager.instance.woodAmount -= baseBuild.buildPrice.wood;
-        PlayerManager.instance.stoneAmount -= baseBuild.buildPrice.stone;
-        PlayerManager.instance.foodAmount -= baseBuild.buildPrice.food;
+        PlayerManager.instance.playerResources.wood -= baseBuild.buildPrice.wood;
+        PlayerManager.instance.playerResources.stone -= baseBuild.buildPrice.stone;
+        PlayerManager.instance.playerResources.food -= baseBuild.buildPrice.food;
     }
 }
