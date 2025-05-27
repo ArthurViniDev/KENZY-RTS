@@ -15,11 +15,17 @@ public class Build : MonoBehaviour
         {
             GameObject selectedBuilding = buildSelectionUI.selectedBuildingPrefab;
             if (!selectedBuilding) return;
-            else if (PlayerManager.instance.woodAmount < selectedBuilding.GetComponent<BaseBuild>().buildPrice.wood ||
-                    PlayerManager.instance.stoneAmount < selectedBuilding.GetComponent<BaseBuild>().buildPrice.stone ||
-                    PlayerManager.instance.foodAmount < selectedBuilding.GetComponent<BaseBuild>().buildPrice.food)
-            { return; }
-
+            // else if (PlayerManager.instance.woodAmount < selectedBuilding.GetComponent<BaseBuild>().buildPrice.wood ||
+            //         PlayerManager.instance.stoneAmount < selectedBuilding.GetComponent<BaseBuild>().buildPrice.stone ||
+            //         PlayerManager.instance.foodAmount < selectedBuilding.GetComponent<BaseBuild>().buildPrice.food)
+            // { return; }
+            var baseBuild = selectedBuilding.GetComponent<BaseBuild>();
+            if (PlayerManager.instance.woodAmount < baseBuild.buildPrice.wood ||
+                PlayerManager.instance.stoneAmount < baseBuild.buildPrice.stone ||
+                PlayerManager.instance.foodAmount < baseBuild.buildPrice.food)
+            {
+                return;
+            }
             BuildConstruction(selectedBuilding);
         }
     }

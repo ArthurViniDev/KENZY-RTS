@@ -2212,7 +2212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPrefabs:
-  - {fileID: 1912896585}
+  - {fileID: 5823332241237531086, guid: c9006955931ee8b40a71deec162f0710, type: 3}
   selectedBuildingPrefab: {fileID: 0}
 --- !u!114 &1887067579
 MonoBehaviour:
@@ -2292,11 +2292,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &1912896585 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5823332241237531086, guid: c9006955931ee8b40a71deec162f0710, type: 3}
-  m_PrefabInstance: {fileID: 3326473466909931916}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1697720539117439502
 PrefabInstance:
   m_ObjectHideFlags: 0
