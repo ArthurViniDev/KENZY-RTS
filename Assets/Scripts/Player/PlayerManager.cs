@@ -40,4 +40,18 @@ public class PlayerManager : MonoBehaviour
         stoneText.text = $"Stones: {stoneAmount}";
         foodText.text = $"Foods: {foodAmount}";
     }
+
+    public bool HasEnoughResources(BuildCost cost)
+    {
+        return woodAmount >= cost.wood &&
+               stoneAmount >= cost.stone &&
+               foodAmount >= cost.food;
+    }
+    public void SpendResources(BuildCost cost)
+    {
+        woodAmount -= cost.wood;
+        stoneAmount -= cost.stone;
+        foodAmount -= cost.food;
+    }
 }
+// This class manages the player's resources and UI updates.
