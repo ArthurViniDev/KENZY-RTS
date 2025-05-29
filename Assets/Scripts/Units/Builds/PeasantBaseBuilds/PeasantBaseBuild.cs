@@ -15,15 +15,9 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
 
     private void Awake() => peasantBaseBuildWindow = transform.GetChild(0).gameObject;
     private void Update() => AddPeasant();
-    public void SellBuild()
-    {// Implement sell build logic here \\
-    }
+    public void SellBuild() {/* Implement sell build logic here */}
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(openableWindow());
-    }
+    void Start() => StartCoroutine(openableWindow());
 
     private IEnumerator openableWindow()
     {

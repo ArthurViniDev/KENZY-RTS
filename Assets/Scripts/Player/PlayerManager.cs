@@ -18,8 +18,7 @@ public struct Resources
 
 public class PlayerManager : MonoBehaviour
 {
-    // Singleton pattern
-    public static PlayerManager instance;
+    public static PlayerManager instance;    // Singleton pattern
 
     [Header("Player Stats")]
     public int peasantPoints = 1;
@@ -62,8 +61,8 @@ public class PlayerManager : MonoBehaviour
     public bool HasEnoughResources(Resources cost)
     {
         return playerResources.wood >= cost.wood &&
-                playerResources.stone >= cost.stone &&
-                playerResources.food >= cost.food;
+               playerResources.stone >= cost.stone &&
+               playerResources.food >= cost.food;
     }
     public void SpendResources(Resources cost)
     {

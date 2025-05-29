@@ -3,7 +3,7 @@ using UnityEngine;
 public class Build : MonoBehaviour
 {
     private BuildSelectionUI buildSelectionUI;
-    [SerializeField] private GameObject CursorIndicatorParent;
+    public GameObject CursorIndicatorParent;
 
     void Awake() => buildSelectionUI = GetComponent<BuildSelectionUI>();
     void Update() => SelectBuildUI();
@@ -19,9 +19,7 @@ public class Build : MonoBehaviour
             if (playerResources.wood < baseBuild.buildPrice.wood ||
                 playerResources.stone < baseBuild.buildPrice.stone ||
                 playerResources.food < baseBuild.buildPrice.food)
-            {
-                return;
-            }
+            { return; }
             BuildConstruction(selectedBuilding);
         }
     }

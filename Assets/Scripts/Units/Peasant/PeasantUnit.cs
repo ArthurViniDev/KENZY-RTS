@@ -18,8 +18,8 @@ public class PeasantUnit : BaseUnit, ICollector
         float distance = Vector3.Distance(transform.position, Target.transform.position);
         if (distance > stopDistance) return;
 
-        currentCollectable = Target?.GetComponent<ICollectable>();
-        if (Target?.GetComponent<BaseResources>().resourceType != resourceType) return;
+        currentCollectable = Target.GetComponent<ICollectable>();
+        if (Target.GetComponent<BaseResources>().resourceType != resourceType) return;
 
         currentCollectable?.OnCollect(this);
         base.OnAttack();
@@ -53,7 +53,7 @@ public class PeasantUnit : BaseUnit, ICollector
                 break;
             default:
                 Debug.LogError("Resource type not found");
-                break;
+            break;
         }
         woodAmount = 0; stoneAmount = 0; foodAmount = 0;
     }
