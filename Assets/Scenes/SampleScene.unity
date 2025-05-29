@@ -156,6 +156,10 @@ MonoBehaviour:
   woodText: {fileID: 528031712}
   stoneText: {fileID: 1321848497}
   foodText: {fileID: 534850057}
+  playerResources:
+    wood: 0
+    stone: 0
+    food: 0
 --- !u!4 &1719399
 Transform:
   m_ObjectHideFlags: 0
@@ -217,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseIndicator: {fileID: 793140627}
   cellIndicator: {fileID: 1325913360}
+  buildingSystem: {fileID: 1887067576}
   gridManager: {fileID: 1775345893}
   grid: {fileID: 1344424921}
 --- !u!1 &282256186
@@ -835,7 +840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &793140628
 Transform:
   m_ObjectHideFlags: 0
@@ -1617,7 +1622,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1325913361
 Transform:
   m_ObjectHideFlags: 0
@@ -1866,7 +1871,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1887067578}
         m_TargetAssemblyTypeName: BuildSelectionUI, Assembly-CSharp
-        m_MethodName: selectStablePrefab
+        m_MethodName: SelectStablePrefab
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
