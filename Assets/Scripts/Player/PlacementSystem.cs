@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
@@ -38,7 +37,6 @@ public class PlacementSystem : MonoBehaviour
 
     private void BuildConstruction()
     {
-        
         Instantiate(buildSelectionUI.selectedBuildingPrefab, cellIndicator.transform.position + buildOffset, Quaternion.Euler(-90f, 0f, 0f));
     }
 
