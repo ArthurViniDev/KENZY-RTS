@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "KENZY-RTS.sln"
+    "dotnet.defaultSolution": "KENZY-RTS.sln",
+    "dotnet.preferCSharpExtension": true
 }

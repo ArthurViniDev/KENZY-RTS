@@ -10,7 +10,6 @@ public class PlacementSystem : MonoBehaviour
 
     private BuildSelectionUI buildSelectionUI;
     private Build build;
-
     private bool hasSelection;
 
     private void Awake()
