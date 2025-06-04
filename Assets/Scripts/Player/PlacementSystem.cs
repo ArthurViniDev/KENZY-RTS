@@ -28,16 +28,11 @@ public class PlacementSystem : MonoBehaviour
         mouseIndicator.transform.position = mousePosition;
         cellIndicator.transform.position = grid.CellToWorld(gridPosition);
 
-        if(Input.GetMouseButtonDown(1) && hasSelection)
-        {
-            BuildConstruction();
-        }
+        if(Input.GetMouseButtonDown(1) && hasSelection) BuildConstruction();
     }
 
-    private void BuildConstruction()
-    {
-        Instantiate(buildSelectionUI.selectedBuildingPrefab, cellIndicator.transform.position + buildOffset, Quaternion.Euler(-90f, 0f, 0f));
-    }
+    private void BuildConstruction() => Instantiate(buildSelectionUI.selectedBuildingPrefab, cellIndicator.transform.position + buildOffset, Quaternion.Euler(-90f, 0f, 0f));
+    
 
     private void UpdateIndicators()
     {

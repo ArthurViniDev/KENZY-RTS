@@ -18,11 +18,10 @@ public struct Resources
 
 public class PlayerManager : MonoBehaviour
 {
-    public static PlayerManager instance;    // Singleton pattern
+    public static PlayerManager instance; // Singleton pattern
 
     [Header("Player Stats")]
-    public int peasantPoints = 1;
-    public int windowsOpened = 0;
+    public int peasantPoints = 1, windowsOpened = 0;
 
     [Header("Player Resource Stats")]
     public int woodAmount, stoneAmount, foodAmount;
