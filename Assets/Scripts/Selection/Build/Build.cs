@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Build : MonoBehaviour
 {
     private BuildSelectionUI buildSelectionUI;
-    public GameObject CursorIndicatorParent;
+    public GameObject cursorIndicatorParent;
 
     void Awake() => buildSelectionUI = GetComponent<BuildSelectionUI>();
     void Update() => SelectBuildUI();
@@ -27,7 +28,7 @@ public class Build : MonoBehaviour
     private void BuildConstruction(GameObject build)
     {
         BaseBuild baseBuild = build.GetComponent<BaseBuild>();
-        GameObject buildCreated = Instantiate(build, CursorIndicatorParent.transform.position, CursorIndicatorParent.transform.rotation);
+        GameObject buildCreated = Instantiate(build, cursorIndicatorParent.transform.position, cursorIndicatorParent.transform.rotation);
         buildCreated.transform.rotation = Quaternion.Euler(-90f, buildCreated.transform.rotation.eulerAngles.y, buildCreated.transform.rotation.eulerAngles.z);
         PlayerManager.instance.playerResources.wood -= baseBuild.buildPrice.wood;
         PlayerManager.instance.playerResources.stone -= baseBuild.buildPrice.stone;

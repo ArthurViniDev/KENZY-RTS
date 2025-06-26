@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour
         stoneText.text = $"Stones: {playerResources.stone}";
         foodText.text = $"Foods: {playerResources.food}";
     }
-
+    
     public bool HasEnoughResources(Resources cost)
     {
         return playerResources.wood >= cost.wood &&
