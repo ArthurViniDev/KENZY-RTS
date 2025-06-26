@@ -21,14 +21,13 @@ public class PlacementSystem : MonoBehaviour
     private void Update()
     {
         UpdateIndicators();
-
-        Vector3 mousePosition = gridManager.GetMouseWorldPosition();
-        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+        var mousePosition = gridManager.GetMouseWorldPosition();
+        var gridPosition = grid.WorldToCell(mousePosition);
 
         mouseIndicator.transform.position = mousePosition;
         cellIndicator.transform.position = grid.CellToWorld(gridPosition);
 
-        if(Input.GetMouseButtonDown(1) && hasSelection) BuildConstruction();
+        if (Input.GetMouseButtonDown(1) && hasSelection) BuildConstruction();
     }
 
     private void BuildConstruction() => Instantiate(buildSelectionUI.selectedBuildingPrefab, cellIndicator.transform.position + buildOffset, Quaternion.Euler(-90f, 0f, 0f));
@@ -36,10 +35,10 @@ public class PlacementSystem : MonoBehaviour
 
     private void UpdateIndicators()
     {
-        hasSelection = buildSelectionUI.selectedBuildingPrefab != null;
+        hasSelection = buildSelectionUI.selectedBuildingPrefab;
         build.CursorIndicatorParent.SetActive(hasSelection);
         mouseIndicator.SetActive(hasSelection);
 
-        if (buildSelectionUI.selectedBuildingPrefab != null) buildSelectionUI.selectedBuildingPrefab.SetActive(true);
+        if (buildSelectionUI.selectedBuildingPrefab) buildSelectionUI.selectedBuildingPrefab.SetActive(true);
     }
 }

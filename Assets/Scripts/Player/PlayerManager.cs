@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance; // Singleton pattern
 
     [Header("Player Stats")]
-    public int peasantPoints = 1, windowsOpened = 0;
+    public int peasantPoints = 1, windowsOpened;
 
     [Header("Player Resource Stats")]
     public int woodAmount, stoneAmount, foodAmount;
@@ -63,6 +63,7 @@ public class PlayerManager : MonoBehaviour
                playerResources.stone >= cost.stone &&
                playerResources.food >= cost.food;
     }
+
     public void SpendResources(Resources cost)
     {
         playerResources.wood -= cost.wood;

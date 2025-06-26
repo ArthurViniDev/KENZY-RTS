@@ -8,11 +8,10 @@ public class GridManager : MonoBehaviour
 
     public Vector3 GetMouseWorldPosition()
     {
-        Vector3 mousePosition = Input.mousePosition;
+        var mousePosition = Input.mousePosition;
         mousePosition.z = mainCamera.nearClipPlane;
-        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100, groundLayerMask)) lastPosition = hit.point;
+        var ray = mainCamera.ScreenPointToRay(mousePosition);
+        if (Physics.Raycast(ray, out var hit, 100, groundLayerMask)) lastPosition = hit.point;
 
         return lastPosition;
     }
