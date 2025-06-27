@@ -24,7 +24,8 @@ public class PlayerManager : MonoBehaviour
     public int peasantPoints = 1, windowsOpened;
 
     [Header("Player Resource Stats")]
-    public int woodAmount, stoneAmount, foodAmount;
+    public Resources playerResources;
+    private Resources lastResources;
 
     [Header("Resource UI")]
     public TextMeshProUGUI woodText;
@@ -35,10 +36,13 @@ public class PlayerManager : MonoBehaviour
     {
         if (!instance) instance = this;
         else Destroy(gameObject);
-    }
 
-    public Resources playerResources;
-    private Resources lastResources;
+        playerResources = new(
+            5,
+            5,
+            5
+        );
+    }
 
     private void Update()
     {
@@ -56,7 +60,7 @@ public class PlayerManager : MonoBehaviour
         stoneText.text = $"Stones: {playerResources.stone}";
         foodText.text = $"Foods: {playerResources.food}";
     }
-    
+
     public bool HasEnoughResources(Resources cost)
     {
         return playerResources.wood >= cost.wood &&

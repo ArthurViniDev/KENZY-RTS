@@ -15,9 +15,12 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
 
     private void Awake() => peasantBaseBuildWindow = transform.GetChild(0).gameObject;
     private void Update() => AddPeasant();
-    public void SellBuild() {/* Implement sell build logic here */}
-
     void Start() => StartCoroutine(OpenableWindow());
+
+    public void SellBuild()
+    {
+
+    }
 
     private IEnumerator OpenableWindow()
     {
@@ -27,11 +30,14 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
     public void OnBuildSelect()
     {
         if (!canOpenWindow) return;
+        else if (PlayerManager.instance.windowsOpened != 0) return;
+        PlayerManager.instance.windowsOpened++;
         peasantBaseBuildWindow.gameObject.SetActive(true);
     }
     public void OnBuildDeselect()
     {
         if (!canOpenWindow) return;
+        PlayerManager.instance.windowsOpened--;
         peasantBaseBuildWindow.SetActive(false);
     }
 
