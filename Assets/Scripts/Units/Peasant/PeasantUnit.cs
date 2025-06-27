@@ -53,7 +53,7 @@ public class PeasantUnit : BaseUnit, ICollector
                 break;
             default:
                 Debug.LogError("Resource type not found");
-            break;
+                break;
         }
         woodAmount = 0; stoneAmount = 0; foodAmount = 0;
     }

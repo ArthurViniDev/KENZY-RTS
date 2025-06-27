@@ -9,13 +9,13 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Grid grid;
 
     private BuildSelectionUI buildSelectionUI;
-    private Build _build;
+    private Build build;
     private bool hasSelection;
-     
+
     private void Awake()
     {
         buildSelectionUI = FindFirstObjectByType<BuildSelectionUI>();
-        _build = buildingSystem.GetComponent<Build>();
+        build = buildingSystem.GetComponent<Build>();
     }
 
     private void Update()
@@ -30,8 +30,8 @@ public class PlacementSystem : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && hasSelection)
         {
             var playerResources = PlayerManager.instance.playerResources;
-            var build = buildSelectionUI.selectedBuildingPrefab;
-            var buildPrice = build.GetComponent<BaseBuild>().buildPrice;
+            var selectedBuild = buildSelectionUI.selectedBuildingPrefab;
+            var buildPrice = selectedBuild.GetComponent<BaseBuild>().buildPrice;
             if (playerResources.wood < buildPrice.wood
                 || playerResources.stone < buildPrice.stone
                 || playerResources.food < buildPrice.food)
@@ -41,12 +41,11 @@ public class PlacementSystem : MonoBehaviour
     }
 
     private void BuildConstruction() => Instantiate(buildSelectionUI.selectedBuildingPrefab, cellIndicator.transform.position + buildOffset, Quaternion.Euler(-90f, 0f, 0f));
-    
 
     private void UpdateIndicators()
     {
         hasSelection = buildSelectionUI.selectedBuildingPrefab;
-        _build.cursorIndicatorParent.SetActive(hasSelection);
+        build.cursorIndicatorParent.SetActive(hasSelection);
         mouseIndicator.SetActive(hasSelection);
 
         if (buildSelectionUI.selectedBuildingPrefab) buildSelectionUI.selectedBuildingPrefab.SetActive(true);
