@@ -121,13 +121,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5823332241237531086}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 3727628993334205809}
+        m_TargetAssemblyTypeName: PeasantBaseBuild, Assembly-CSharp
+        m_MethodName: SellBuild
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -552,6 +552,8 @@ MonoBehaviour:
   peasantSpawnPoint: {fileID: 4860241888201975057}
   peasantAmount: 0
   maxPeasantAmount: 2
+  canOpenWindow: 0
+  stable: {fileID: 0}
   resourceType: 2
 --- !u!65 &3935201272930865007
 BoxCollider:
@@ -589,9 +591,9 @@ MonoBehaviour:
   buildTime: 5
   buildingPrefab: {fileID: 0}
   buildPrice:
-    wood: 1
-    stone: 1
-    food: 1
+    wood: 5
+    stone: 5
+    food: 5
 --- !u!1 &5931757400881118242
 GameObject:
   m_ObjectHideFlags: 0

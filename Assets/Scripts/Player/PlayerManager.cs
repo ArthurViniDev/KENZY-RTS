@@ -68,10 +68,17 @@ public class PlayerManager : MonoBehaviour
                playerResources.food >= cost.food;
     }
 
-    public void SpendResources(Resources cost)
+    public void SpendResources(int woodCost, int stoneCost, int foodCost)
     {
-        playerResources.wood -= cost.wood;
-        playerResources.stone -= cost.stone;
-        playerResources.food -= cost.food;
+        playerResources.wood -= woodCost;
+        playerResources.stone -= stoneCost;
+        playerResources.food -= foodCost;
+    }
+
+    public void RefundResources(int woodValue, int stoneValue, int foodValue)
+    {
+        playerResources.wood += woodValue;
+        playerResources.stone += stoneValue;
+        playerResources.food += foodValue;
     }
 }

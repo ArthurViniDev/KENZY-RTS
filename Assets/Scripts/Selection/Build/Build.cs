@@ -29,8 +29,9 @@ public class Build : MonoBehaviour
         var baseBuild = build.GetComponent<BaseBuild>();
         var buildCreated = Instantiate(build, cursorIndicatorParent.transform.position, cursorIndicatorParent.transform.rotation);
         buildCreated.transform.rotation = Quaternion.Euler(-90f, buildCreated.transform.rotation.eulerAngles.y, buildCreated.transform.rotation.eulerAngles.z);
-        PlayerManager.instance.playerResources.wood -= baseBuild.buildPrice.wood;
-        PlayerManager.instance.playerResources.stone -= baseBuild.buildPrice.stone;
-        PlayerManager.instance.playerResources.food -= baseBuild.buildPrice.food;
+        // PlayerManager.instance.playerResources.wood -= baseBuild.buildPrice.wood;
+        // PlayerManager.instance.playerResources.stone -= baseBuild.buildPrice.stone;
+        // PlayerManager.instance.playerResources.food -= baseBuild.buildPrice.food;
+        PlayerManager.instance.SpendResources(baseBuild.buildPrice.wood, baseBuild.buildPrice.stone, baseBuild.buildPrice.food);
     }
 }
