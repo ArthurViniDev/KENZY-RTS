@@ -46,6 +46,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(WindowEventBus.WindowsOpenedCount);
         if (lastResources.wood == playerResources.wood &&
             lastResources.stone == playerResources.stone &&
             lastResources.food == playerResources.food) return;

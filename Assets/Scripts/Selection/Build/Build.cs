@@ -2,36 +2,5 @@ using UnityEngine;
 
 public class Build : MonoBehaviour
 {
-    private BuildSelectionUI buildSelectionUI;
     public GameObject cursorIndicatorParent;
-
-    private void Awake() => buildSelectionUI = GetComponent<BuildSelectionUI>();
-    private void Update() => SelectBuildUI();
-
-    private void SelectBuildUI()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            var selectedBuilding = buildSelectionUI.selectedBuildingPrefab;
-            if (!selectedBuilding) return;
-            var baseBuild = selectedBuilding.GetComponent<BaseBuild>();
-            var playerResources = PlayerManager.instance.playerResources;
-            if (playerResources.wood < baseBuild.buildPrice.wood ||
-                playerResources.stone < baseBuild.buildPrice.stone ||
-                playerResources.food < baseBuild.buildPrice.food)
-                return;
-            BuildConstruction(selectedBuilding);
-        }
-    }
-
-    private void BuildConstruction(GameObject build)
-    {
-        var baseBuild = build.GetComponent<BaseBuild>();
-        var buildCreated = Instantiate(build, cursorIndicatorParent.transform.position, cursorIndicatorParent.transform.rotation);
-        buildCreated.transform.rotation = Quaternion.Euler(-90f, buildCreated.transform.rotation.eulerAngles.y, buildCreated.transform.rotation.eulerAngles.z);
-        // PlayerManager.instance.playerResources.wood -= baseBuild.buildPrice.wood;
-        // PlayerManager.instance.playerResources.stone -= baseBuild.buildPrice.stone;
-        // PlayerManager.instance.playerResources.food -= baseBuild.buildPrice.food;
-        PlayerManager.instance.SpendResources(baseBuild.buildPrice.wood, baseBuild.buildPrice.stone, baseBuild.buildPrice.food);
-    }
 }

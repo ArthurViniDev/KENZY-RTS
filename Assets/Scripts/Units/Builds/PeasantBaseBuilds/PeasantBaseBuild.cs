@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,7 +6,6 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
 {
     [SerializeField] private GameObject peasantPrefab;
     [SerializeField] private GameObject peasantSpawnPoint;
-    private int playerWindowsOpened;
     public int peasantAmount = 0;
     public int maxPeasantAmount = 2;
     public bool canOpenWindow = false;
@@ -23,11 +23,33 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
     {
         stable = GetComponent<Stable>();
         StartCoroutine(OpenableWindow());
-        playerWindowsOpened = PlayerManager.instance.windowsOpened;
+    }
+
+    private void OnEnable()
+    {
+        WindowEventBus.OnWindowOpened += HandleWindowOpen;
+        WindowEventBus.OnWindowClosed += HandleWindowClose;
+    }
+
+    private void OnDisable()
+    {
+        WindowEventBus.OnWindowOpened -= HandleWindowOpen;
+        WindowEventBus.OnWindowClosed -= HandleWindowClose;
+    }
+
+    private void HandleWindowOpen(GameObject window)
+    {
+        if (window == peasantBaseBuildWindow) peasantBaseBuildWindow.SetActive(true);
+    }
+
+    private void HandleWindowClose(GameObject window)
+    {
+        if (window == peasantBaseBuildWindow) peasantBaseBuildWindow.SetActive(false);
     }
 
     public void SellBuild()
     {
+        OnBuildDeselect();
         int[] SplitValuesInHalf(int n1, int n2, int n3) => new int[] { Mathf.Abs(n1 / 2), Mathf.Abs(n2 / 2), Mathf.Abs(n3 / 2) };
         int[] refund = SplitValuesInHalf(stable.buildPrice.wood, stable.buildPrice.stone, stable.buildPrice.food);
         PlayerManager.instance.RefundResources(refund[0], refund[1], refund[2]);
@@ -39,19 +61,10 @@ public class PeasantBaseBuild : MonoBehaviour, IBuildSelectable
         yield return new WaitForSeconds(0.2f);
         canOpenWindow = true;
     }
-    public void OnBuildSelect()
-    {
-        if (!canOpenWindow) return;
-        else if (playerWindowsOpened != 0) return;
-        playerWindowsOpened++;
-        peasantBaseBuildWindow.gameObject.SetActive(true);
-    }
-    public void OnBuildDeselect()
-    {
-        if (!canOpenWindow) return;
-        playerWindowsOpened--;
-        peasantBaseBuildWindow.SetActive(false);
-    }
+
+    public void OnBuildSelect() => WindowEventBus.OpenWindow(peasantBaseBuildWindow);
+
+    public void OnBuildDeselect() => WindowEventBus.CloseWindow(peasantBaseBuildWindow);
 
     private void AddPeasant()
     {
